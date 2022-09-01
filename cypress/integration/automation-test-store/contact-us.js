@@ -3,7 +3,11 @@
 describe('Test Contact US Form via automation test store', () => {
   it('Should be able to submit a successful submission via contact us form', () => {
     cy.visit('https://automationteststore.com/')
-    cy.get('a[href$="contact"]').click()
+    cy.get('a[href$="contact"]')
+      .click()
+      .then(function (linkText) {
+        cy.log('Landed on Contact us page: ' + linkText.text())
+      })
     cy.get('#ContactUsFrm_first_name').type('AZIMA')
     cy.get('#ContactUsFrm_email').type('azima@gmail.com')
     cy.get('#ContactUsFrm_email').should('have.attr', 'name', 'email')
